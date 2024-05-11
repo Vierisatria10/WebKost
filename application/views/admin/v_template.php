@@ -150,7 +150,7 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Data Kamar</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/kamar') ?>">Data Kamar</a></li>
                   <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/fasilitas') ?>">Data Fasilitas</a></li>
                 </ul>
               </div>

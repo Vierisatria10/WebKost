@@ -45,4 +45,12 @@ class Fasilitas extends CI_Controller {
         $this->session->set_flashdata('success', 'Data Fasilitas Berhasil di Update');
         redirect('admin/fasilitas');
     }
+
+    public function hapus_fasilitas()
+    {
+        $id_fasilitas = $this->input->post('id_fasilitas');
+        $this->fasilitas->hapus_fasilitas($id_fasilitas);
+        $this->session->set_flashdata('success', 'Data Fasilitas Berhasil di Hapus');
+        redirect('admin/fasilitas');
+    }
 }

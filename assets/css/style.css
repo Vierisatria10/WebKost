@@ -13623,9 +13623,9 @@ dl {
     padding: 0.9375rem; }
     .table th img,
     .table td img {
-      width: 36px;
-      height: 36px;
-      border-radius: 100%; }
+      width: 50%;
+      height: auto;
+       }
     .table th .badge,
     .table td .badge {
       margin-bottom: 0; }

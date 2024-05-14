@@ -94,4 +94,22 @@ class KamarModel extends CI_Model
 		return $this->db->delete('tbl_kamar', $del);
 	}
 
+    public function detail_kamar($nomor_kamar)
+    {
+        $this->db->select('a.*, b.*');
+        $this->db->from('tbl_kamar a');
+        $this->db->join('tbl_kriteria b', 'a.id_kriteria = b.id_kriteria', 'left');
+        $this->db->where('nomor_kamar', $nomor_kamar);
+        $query = $this->db->get()->row();
+        return $query;
+        // return $this->db->get_where('tbl_kamar', ['nomor_kamar' => $nomor_kamar])->row();
+    }
+
+    public function get_kamar_by_price_range($range_awal, $range_akhir) {
+        $this->db->where('harga >=', $range_awal);
+        $this->db->where('harga <=', $range_akhir);
+        $query = $this->db->get('tbl_kamar');
+        return $query->result();
+    }
+
 }

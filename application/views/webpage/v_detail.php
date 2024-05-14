@@ -17,12 +17,10 @@
   <body>
     
     <div class="container mt-2">
-      <form action="<?= base_url('Page/search_by_price_range') ?>" method="POST">
         <div class="row">
             <div class="col-3">
                 <h4 class="text-primary text-logo d-sm-block d-none"><b>Web Kos</b></h4>
             </div>
-            
             <div class="col-3">
                 <input type="text" name="range_awal" id="range_awal" class="form-control" placeholder="Range Harga Awal">
             </div>
@@ -32,9 +30,7 @@
             <div class="col-3">
                 <button class="btn btn-light text-primary" type="submit"><i class="fa fa-search"></i></button>
             </div>
-            
         </div>
-      </form>
     </div>
     <hr>
     <div class="container">
@@ -52,7 +48,7 @@
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="#">Dashboard Penghuni</a></li>
-                        <li><a class="dropdown-item" href="#" id="logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('Page/logout') ?>">Logout</a></li>
                       </ul>
                   </div>
                 <?php else : ?>
@@ -66,7 +62,7 @@
     </div>
     <hr style="margin-top: -1px;">
     <div class="container">
-        <div class="row">
+          <div class="row">
             <div class="col">
                 <?php if($this->session->userdata('nama')): ?>
                 <a href="<?= base_url('Page/home') ?>" class="text-primary" style="text-decoration: none; font-size: 18px;">Home</a>
@@ -78,8 +74,11 @@
                 <?php endif; ?>
             </div>
         </div>
+        <a href="<?= base_url('Page/home') ?>" class="btn btn-light text-primary"><i class="fa fa-arrow-left"></i></a>
+
         <div class="row mt-4">
-            <div class="col-md-12">
+            <h4><?= $detail_kamar->nomor_kamar ?></h4>
+            <div class="col-md-6 col-sm-6">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -110,66 +109,43 @@
                       </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
                       <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
                 </div>
             </div>
-            
-        </div>
-    </div>
+            <div class="col-md-6 mt-2 col-sm-6">
+              <button class="btn btn-outline-primary" type="button">Keterangan Kamar</button>
+              <button class="btn btn-outline-primary rounded-3" type="button"><?= $detail_kamar->nama ?></button>
 
-    <div class="container mt-4">
-      <h4 class="mt-4">Kamar Tersedia</h4>
-        <div class="row row-cols-2 row-cols-md-4 g-4">
-          <?php if(empty($master_kamar)) : ?>
-            <h4 class="text-center">Data Kamar Belum Ada</h4>
-          <?php else: ?>
-          <?php foreach($master_kamar as $kamar) : ?>
-            <div class="col">
-              <div class="card shadow">
-                <a href="<?= base_url('Page/detail_kamar/'.$kamar->nomor_kamar) ?>">
-                  <div class="zoom-container">
-                    <img src="<?= base_url('uploads/foto/'.$kamar->foto) ?>" class="card-img-top" alt="gambar1">
-                    <div class="zoom-overlay"></div>
-                  </div>
-                </a>
-                <div class="card-body">
-                  <h5 class="card-title text-center"><?= $kamar->nomor_kamar ?></h5>
-                  <p class="card-text text-center"><?= $kamar->harga ?></p>
-                </div>
+              <h4 class="mt-3 fw-bold"><?= $detail_kamar->harga ?></h4>
+              <p class="fw-bold"><?= $detail_kamar->nomor_kamar ?> | <?= $detail_kamar->jumlah_fasilitas ?> Fasilitas</p>
+              <p class="mt-3 fw-bold">Keterangan : <?= $detail_kamar->keterangan ?></p>
+              <p class="fw-bold">Fasilitas : </p>
+              <p style="margin-top: -12px;"><i class="fa fa-check text-primary"></i> <?php
+              $fasilitas = $detail_kamar->nama_fasilitas;
+              $fasilitas_array = explode(',', $fasilitas); 
+              echo implode("<br> <i class='fa fa-check text-primary'></i>", $fasilitas_array);
+              ?></p>
+              <p class="fw-bold">Alamat : </p>
+              <p><?= $detail_kamar->alamat ?></p>
+              <?php if($this->session->userdata('nama')) : ?>
+              <div class="d-grid gap-2 mx-auto">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#modalSewa" class="btn btn-primary">Lanjut Sewa <i class="fa fa-arrow-right"></i></button>
               </div>
+             <?php else: ?>
+              <div class="d-grid gap-2 mx-auto">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#login" class="btn btn-primary">Login Sekarang <i class="fa fa-arrow-right"></i></button>
+              </div>
+              <?php endif; ?>
             </div>
-          <?php endforeach; 
-          endif;?>
-          </div>
+        </div>
     </div>
 
-    <?php if($this->session->userdata('nama')) : ?>
-    <section class="mt-4" style="background-color: rgb(221, 246, 255);">
-        <h2 class="py-4 px-4 text-center border border-2">PESAN SEKARANG</h2>
-        <p class="text-center">Silahkan Lakukan Pesan Kamar Anda Sesuai Keinginan!</p>
-       
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <a href="<?= base_url('Page/list_kamar') ?>" class="btn btn-primary" style="border-radius: 30px;" >PESAN SEKARANG <I class="fa fa-arrow-right"></I></a>
-        </div>
-        <br><br>
-    </section>
-    <?php else : ?>
-      <section class="mt-4" style="background-color: rgb(221, 246, 255);">
-        <h2 class="py-4 px-4 text-center border border-2">LOGIN AKUN</h2>
-        <p class="text-center">Login untuk melakukan order Design Brand Anda!</p>
-       
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login" style="border-radius: 30px;" type="button">LOGIN <I class="fa fa-arrow-right"></I></button>
-        </div>
-        <br><br>
-      </section>
-    <?php endif; ?>
 
     <section class="mt-4" style="background-color: rgb(221, 246, 255);">
       <div class="container">
@@ -238,6 +214,48 @@
       </ul>
     </nav>
 
+  <!-- Modal Sewa -->
+    <div class="modal fade" id="modalSewa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="exampleModalLabel">Sewa Kost | Penyewaan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="sewa_form">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="border border-3 border-primary rounded-pill">
+                  <h4 class="text-center"><?= $detail_kamar->harga ?></h4>
+                  <input type="hidden" class="form-control" name="harga" id="harga" value="<?= $detail_kamar->harga ?>">
+                </div>
+                <h4 class="fw-bold mt-2"><?= $detail_kamar->nomor_kamar ?></h4>
+                <input type="hidden" class="form-control" name="nomor_kamar" id="nomor_kamar" value="<?= $detail_kamar->nomor_kamar ?>">
+                <p class="fw-bold">Tarif per Bulan : <?= $detail_kamar->harga ?></p>
+                <div class="form-group">
+                  <label for="">Tanggal Sewa</label>
+                  <input type="date" class="form-control" name="tgl_sewa" id="tgl_sewa">
+                </div>
+                <p class="mt-3">Pembayaran Kost : </p>
+                <p style="margin-top: -14px;">1. Online = Upload Bukti Pembayaran</p>
+                <p style="margin-top: -14px;">2. Offline = Terima Uang Tunai</p>
+                <p>Keterangan : <?= $detail_kamar->keterangan ?></p>
+                <input type="hidden" class="form-control" name="keterangan" id="keterangan" value="<?= $detail_kamar->keterangan ?>">
+                <p style="margin-top: -14px;">Kriteria &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Kost <?= $detail_kamar->nama ?></p>
+                <p style="margin-top: -14px;">Alamat &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <?= $detail_kamar->alamat ?></p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="d-grid gap-2 col-12 mx-auto">
+              <button type="submit" class="btn btn-primary">Sewa Sekarang</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Modal Login -->
     <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -334,8 +352,14 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?php $this->load->view('webpage/jd_custom.php') ?>"></script>
+    <script src="<?php $this->load->view('webpage/js_custom.php') ?>"></script>
+    
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
   </body>
 </html>

@@ -17,12 +17,10 @@
   <body>
     
     <div class="container mt-2">
-      <form action="<?= base_url('Page/search_by_price_range') ?>" method="POST">
         <div class="row">
             <div class="col-3">
                 <h4 class="text-primary text-logo d-sm-block d-none"><b>Web Kos</b></h4>
             </div>
-            
             <div class="col-3">
                 <input type="text" name="range_awal" id="range_awal" class="form-control" placeholder="Range Harga Awal">
             </div>
@@ -32,9 +30,7 @@
             <div class="col-3">
                 <button class="btn btn-light text-primary" type="submit"><i class="fa fa-search"></i></button>
             </div>
-            
         </div>
-      </form>
     </div>
     <hr>
     <div class="container">
@@ -52,7 +48,7 @@
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="#">Dashboard Penghuni</a></li>
-                        <li><a class="dropdown-item" href="#" id="logout">Logout</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('Page/logout') ?>">Logout</a></li>
                       </ul>
                   </div>
                 <?php else : ?>
@@ -66,7 +62,7 @@
     </div>
     <hr style="margin-top: -1px;">
     <div class="container">
-        <div class="row">
+          <div class="row">
             <div class="col">
                 <?php if($this->session->userdata('nama')): ?>
                 <a href="<?= base_url('Page/home') ?>" class="text-primary" style="text-decoration: none; font-size: 18px;">Home</a>
@@ -78,98 +74,18 @@
                 <?php endif; ?>
             </div>
         </div>
+        <a href="<?= base_url('Page/home') ?>" class="btn btn-light text-primary"><i class="fa fa-arrow-left"></i></a>
+
         <div class="row mt-4">
-            <div class="col-md-12">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="<?= base_url('assets/img/gambar2.jpg') ?>" style="border-radius: 20px; width: 100%; height: auto; background-size: cover; background-position: center; background-repeat: no-repeat;" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>First slide label</h5>
-                          <p>Some representative placeholder content for the first slide.</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img src="<?= base_url('assets/img/gambar2.jpg') ?>" style="border-radius: 20px; width: 100%; height: auto; background-size: cover; background-position: center; background-repeat: no-repeat;" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Second slide label</h5>
-                          <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img src="<?= base_url('assets/img/gambar3.jpg') ?>" style="border-radius: 20px; width: 100%; height: auto; background-size: cover; background-position: center; background-repeat: no-repeat;" alt="...">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h5>Third slide label</h5>
-                          <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+            <div class="col-md-6 col-sm-6">
+                
             </div>
-            
+            <div class="col-md-6 mt-2 col-sm-6">
+              
+            </div>
         </div>
     </div>
 
-    <div class="container mt-4">
-      <h4 class="mt-4">Kamar Tersedia</h4>
-        <div class="row row-cols-2 row-cols-md-4 g-4">
-          <?php if(empty($master_kamar)) : ?>
-            <h4 class="text-center">Data Kamar Belum Ada</h4>
-          <?php else: ?>
-          <?php foreach($master_kamar as $kamar) : ?>
-            <div class="col">
-              <div class="card shadow">
-                <a href="<?= base_url('Page/detail_kamar/'.$kamar->nomor_kamar) ?>">
-                  <div class="zoom-container">
-                    <img src="<?= base_url('uploads/foto/'.$kamar->foto) ?>" class="card-img-top" alt="gambar1">
-                    <div class="zoom-overlay"></div>
-                  </div>
-                </a>
-                <div class="card-body">
-                  <h5 class="card-title text-center"><?= $kamar->nomor_kamar ?></h5>
-                  <p class="card-text text-center"><?= $kamar->harga ?></p>
-                </div>
-              </div>
-            </div>
-          <?php endforeach; 
-          endif;?>
-          </div>
-    </div>
-
-    <?php if($this->session->userdata('nama')) : ?>
-    <section class="mt-4" style="background-color: rgb(221, 246, 255);">
-        <h2 class="py-4 px-4 text-center border border-2">PESAN SEKARANG</h2>
-        <p class="text-center">Silahkan Lakukan Pesan Kamar Anda Sesuai Keinginan!</p>
-       
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <a href="<?= base_url('Page/list_kamar') ?>" class="btn btn-primary" style="border-radius: 30px;" >PESAN SEKARANG <I class="fa fa-arrow-right"></I></a>
-        </div>
-        <br><br>
-    </section>
-    <?php else : ?>
-      <section class="mt-4" style="background-color: rgb(221, 246, 255);">
-        <h2 class="py-4 px-4 text-center border border-2">LOGIN AKUN</h2>
-        <p class="text-center">Login untuk melakukan order Design Brand Anda!</p>
-       
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#login" style="border-radius: 30px;" type="button">LOGIN <I class="fa fa-arrow-right"></I></button>
-        </div>
-        <br><br>
-      </section>
-    <?php endif; ?>
 
     <section class="mt-4" style="background-color: rgb(221, 246, 255);">
       <div class="container">
@@ -334,8 +250,13 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="<?php $this->load->view('webpage/jd_custom.php') ?>"></script>
+    <script src="<?php $this->load->view('webpage/js_custom.php') ?>"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
   </body>
 </html>

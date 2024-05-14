@@ -21,7 +21,7 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="<?= base_url('assets/images/logo.svg') ?>" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="index.html">WEB KOST
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="<?= base_url('assets/images/logo-mini.svg') ?>" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -152,6 +152,7 @@
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/kamar') ?>">Data Kamar</a></li>
                   <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/fasilitas') ?>">Data Fasilitas</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/kriteria') ?>">Data Kriteria</a></li>
                 </ul>
               </div>
             </li>
